@@ -124,3 +124,12 @@ _modules/*
 
 /results/
 /phpunit*.xml
+
+#-------------------------
+# Local / Notes / Docs
+#-------------------------
+# Abaikan file catatan lokal yang tidak perlu di-push
+test.txt
+materi.txt
+log_progress.md
+*.pdf
