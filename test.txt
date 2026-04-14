@@ -1,320 +1,341 @@
-# Codeigniter4 - Layout
+# Codeigniter4 - Session
 
-Sebelum melanjutkan mengerjakan project, jangan lupa cek kembali konfigurasi pada 
-**materi 3 slide 12 - 14**, pastikan semuanya sudah siap.
-[**Materi 3 - Konsep MVC dan PHP Framework (CodeIgniter)**](https://docs.google.com/presentation/d/1PqFe2ygkfDwHuglGIbYEF9YCBNEQPECN/edit?usp=drive_link&ouid=109942308472590012034&rtpof=true&sd=true)
-
-- Konfigurasi Template NiceAdmin
-    1. Sebelumnya, sudah berhasil membuat view baru untuk menu home, produk, dan keranjang. Namun masih berupa halaman  yang hanya berisi teks dan link sederhana. Tampilan pada Codeigniter yang terletak pada folder Views pada dasarnya adalah berisi code HTML, sehingga bisa dipercantik menggunakan CSS yang dibuat sendiri, ataupun menerapkan template web yang sudah jadi. 
-    Pada project kali ini, akan menerapkan template jadi yang siap pakai bernama NiceAdmin. Template ini sudah cukup lengkap dan bagus, terdapat tampilan responsive untuk layar desktop, tablet, dan mobile. Live demonya bisa dicoba di https://bootstrapmade.com/demo/NiceAdmin/
-        
-        ![image.png](attachment:7e94bb16-5a60-49f0-8f51-80c80b81c365:image.png)
-        
-        Untuk file templatenya, yang terdiri dari file html dan pelengkapnya (css, js, img, dll) silakan download dulu [disini](https://drive.google.com/file/d/1VwpEmBEcu0HccuoZG7h3HoKooIonZZ7H/view?usp=sharing). Kemudian extract dan letakkan folder **NiceAdmin** di dalam folder **public** yang ada pada project.
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/a5db2d1e-7243-467b-af5f-f4eeff24baa2/Untitled.png)
-        
-        Pastikan urutan folder nya seperti contoh di atas. Folder dengan nama NiceAdmin hanya ada satu di dalam folder public.
-        
-    2. Siapkan sebuah layout dasar yang akan digunakan sebagai tampilan utama website. Di dalam file layout ini, terdapat komponen-komponen penyusun dari sebuah tampilan (header, footer, dan sidebar) dan menyisakan ruang untuk konten utama. 
-    Menggunakan  layout bertujuan untuk memudahkan dalam melakukan rendering view. 
-    Sehingga berikutnya, ketika membuat file view untuk sebuah menu misalnya halaman produk, tinggal memanggil file layout yang sudah dibuat sebelumnya kemudian pada view produk ini fokus hanya membuat konten utamanya saja untuk mengisi ruang konten pada layout. 
-    Dengan begini jadi tidak perlu menuliskan lagi code bagian header, footer, sidebar, pemanggilan css dan js, dll secara berulang-ulang pada setiap view, karena sudah ada pada layout. 
-        
-        
-        Pertama, buat file baru bernama layout.php di dalam folder app/Views
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/fb3327d7-dd12-47ef-94fa-500e9e854382/Untitled.png)
-        
-    3. Buat folder beru bernama components di dalam folder app/Views
-    Isi folder tersebut dengan tiga file baru yaitu header.php, sidebar.php, footer.php
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/f5d21d45-5c9f-47f6-9e28-07ac82152bbb/Untitled.png)
-        
-    4. Untuk tampilan yang akan dijadikan acuan adalah file public/NiceAdmin/tables-data.html
-        
-        ![image.png](attachment:6d3a6460-a530-4cc5-9f82-3477a892fc01:image.png)
-        
-        Halaman ini akan dipisah (slice) menjadi tiga komponen penyusun layout yaitu header, sidebar, dan footer.
-        
-        ![image.png](attachment:b07be152-2edc-417e-a760-f7d7170646df:image.png)
-        
-        Untuk mempermudah saat slicing, aktifkan Jendela Developer Tools untuk melihat elemen html per bagian, caranya klik kanan pada mouse kemudian pilih Inspect, pada jendela developer tools pilih tab Inspector. 
-        
-        ![image.png](attachment:f258f5c0-b054-47dd-8098-b53cb859e1fb:image.png)
-        
-        Aktivkan kursor untuk melihat elemen html per bagian dan hasil tampilannya.
-        
-        **Header**
-        
-        ![image.png](attachment:30d39605-0c06-465d-93b7-537ba5094f16:image.png)
-        
-         
-        
-        **Sidebar**
-        
-        ![image.png](attachment:b7a0fab4-7aef-4686-90ff-8f6e98002045:image.png)
-        
-        **Footer**
-        
-        ![image.png](attachment:88ce5ebe-98ca-4603-a579-a2838fb6e2b3:image.png)
-        
-        Mulai dengan meng-copy semua code pada file public/NiceAdmin/tables-data.html ke dalam file app\Views\layout.php
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/fd54a0ff-84aa-4fb8-8563-82c64f821cfc/Untitled.png)
-        
-    5. Pada file app\Views\layout.php, sesuaikan **SEMUA** url pemanggilan assets nya, baik saat memanggil css, js, maupun img. Ini mengarahkan pemanggilan assets kepada folder public/NiceAdmin. 
-        
-        Salah satu contohnya :
-        
-        ```html
-        <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-        ```
-        
-        Menjadi
-        
-        ```html
-        <link href="<?= base_url()?>NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-        ```
-        
-        Sehingga nanti pada browser akan memanggil assets dengan alamat :
-        
-        http://localhost:8080/NiceAdmin/assets/vendor/simple-datatables/style.css
-        
-        Cara menggantinya, bisa menggunakan menu Edit-Replace pada VS Code.
-        
-        ![image.png](attachment:d2559e5b-77a4-4623-b449-57b1509dd92b:image.png)
-        
-        Isikan pada kolom : 
-        **assets** ubah menjadi **<?= base_url()?>NiceAdmin/assets**
-        
-        Lalu klik icon Replace All. 
-        Pastikan semua pemanggilan assets sudah berubah.
-        
-        ![image.png](attachment:52c79a6d-f3d8-42d3-be63-552992c154c6:image.png)
-        
-        Perhatikan, jika project berjalan tidak pada port default http://localhost:8080/, misalnya di http://localhost:8081/. Maka perlu ada penyesuaian pada variable $baseURL pada file app\Config\App.php seperti ini.
-        
-        ![image.png](attachment:99aee5bf-2d66-4b8d-8b9a-ea260bb21c3a:image.png)
-        
-- Template Slicing untuk membuat Layout
-    1. Langkah selanjutnya adalah, code html pada file app\Views\layout.php akan dipisah-pisah (slicing) menjadi component header, sidebar, footer, dan content terpisah.
+1. Selanjutnya website akan dibatasi aksesnya, hanya user yang sudah berhasil login yang bisa mengakses menu-menu yang ada di dalam sistem. Jadi, diawal user harus menginputkan pasangan data username dan password yang dianggap valid oleh sistem pada sebuah form login. 
     
-    Tujuan melakukan slicing ini, supaya mempermudah jika akan melakukan perubahan tampilan. Misalnya jika akan mengubah daftar menu yang ada pada sidebar, cukup mengubahnya pada file app\Views\components\sidebar.php, maka semua file view yang menggunakan layout yang sama (layout.php) akan langsung bisa menampilkan menu sidebar yang terbaru.
+    Kemudian, data user yang sudah berhasil login tersebut harus disimpan dalam sebuah session, karena pada dasarnya protokol HTTP tidak menyimpan keadaan (stateless). Sehingga walaupun user sudah berhasil login pada halaman login, lalu user klik menu yang lain dan berpindah ke halaman lain (misalnya ke halaman produk), maka pada halaman baru itu nanti user akan kembali dianggap belum login. Oleh karena itu, perlu ada nilai-nilai yang disimpan pada sebuah session sebagai penanda user yang mengakses sudah berhasil login atau belum. 
     
-    Umumnya, pada file template, terdapat penanda pada setiap section tampilannya. Misalnya pada header, sebagai penanda pada awal bagian terdapat tulisan 
-    **<!-- ======= Header ======= -->**
-        
-        ![image.png](attachment:d1e4f871-be55-4759-bdf8-c50666ee8eef:image.png)
-        
-        Dan sebagai penanda akhir bagian terdapat tulisan
-        
-        **<!-- End Header -->**
-        
-        ![image.png](attachment:25f5f295-7ff7-409d-89a1-aa2462f3e2c1:image.png)
-        
-        Penanda pada setiap bagian-bagian seperti ini sangat membantu developer saat melakukan slicing template. 
-        
-        Selanjutnya yang harus dilakukan kemudian adalah pada file app\Views\layout.php, copy baris 43-270 dan paste di file app\Views\components\header.php
-        
-        ```html
-        <!-- ======= Header ======= --> sampai <!-- End Header -->
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/e9ce1036-ecbd-4b74-b395-11029a1e41f8/Untitled.png)
-        
-    2. Lanjutkan untuk bagian sidebar. Pada file app\Views\layout.php, copy baris 272-507 dan paste di file app\Views\components\sidebar.php
-        
-        ```html
-        <!-- ======= Sidebar ======= --> sampai <!-- End Sidebar-->
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/1f48632e-9ca8-4dd1-8e20-90ceecf4f332/Untitled.png)
-        
-    3. Lanjutkan untuk bagian Footer. Pada file app\Views\layout.php, copy baris 591-603 dan paste di file app\Views\components\footer.php
-        
-        ```html
-        <!-- ======= Footer ======= --> sampai <!-- End Footer -->
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/aa7c18f6-fb01-4676-b26f-986a8b4a8e70/Untitled.png)
-        
-    4. Kemudian selain tiga komponen tadi, pada file app\Views\layout.php, copy baris 531-580 dan paste di file app\Views\v_home.php (timpa code pada v_home yang sebelumnya dibuat). Ini sementara akan menjadi content pada tampilan menu home.
-        
-        ```html
-        <!-- Table with stripped rows --> sampai <!-- End Table with stripped rows -->
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/8e976c8e-363d-493d-8d7e-32158576fede/Untitled.png)
-        
-    5. Setelah memindahkan code ke dalam setiap file component penyusun layout, lanjutkan dengan memanggil component-component tersebut pada file app/Views/layout.php.
-        
-        Hapus baris 591-603 dan ganti dengan 
-        
-        ```php
-        **<?= $this->include('components/footer') ?>**
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/42610cf8-9111-424e-bbf4-9548c334a014/Untitled.png)
-        
-    6. Pada file app/Views/layout.php hapus baris 272-507 dan ganti dengan 
-        
-        ```php
-        **<?= $this->include('components/sidebar') ?>**
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/98fb6de7-8201-49ab-9468-85e2a3d8e746/Untitled.png)
-        
-    7. Pada file app/Views/layout.php hapus baris 43-270 dan ganti dengan 
-        
-        ```php
-        **<?= $this->include('components/header') ?>**
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/4ab3e481-7dda-4139-b0ff-588969294566/Untitled.png)
-        
-    8. Pada file app/Views/layout.php hapus baris 
-        
-        dari **<!-- Table with stripped rows -->** sampai **<!-- End Table with stripped rows -->** 
-        kemudian ganti dengan 
-        
-        ```php
-        **<?= $this->renderSection('content') ?>**
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/c58cc469-6df7-4877-bdc3-756c3b8987c4/Untitled.png)
-        
-        Bagian ini menjadi tempat menampilkan isi content dari file-file view yang menggunakan layout dasar yang sudah dibuat.
-        
-        Sampai tahap ini, sementara slicing template sudah selesai dan layout sudah bisa digunakan.
-        
-- Menggunakan Layout pada View
-    1. Pada file app\Views\components\header.php, ubah nama toko pada baris ke 7
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/0672b652-6873-4300-afe3-49a2b4539457/Untitled.png)
-        
-    2. Pada file app\Views\components\footer.php, ubah nama toko pada baris ke 4
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/192977a3-07c0-4ee6-b87e-87277ba6cb08/Untitled.png)
-        
-    3. Cara menggunakan layout yang telah dibuat tadi untuk menjadi tampilan dari sebuah menu adalah dengan cara melakukan extend pada file view tersebut, misalnya layout akan digunakan pada halaman beranda, buka file app\Views\v_home.php lalu pada baris paling atas tambahkan
-        
-        ```php
-        <?= $this->extend('layout') ?>
-        <?= $this->section('content') ?>
-        ```
-        
-        ![image.png](attachment:e52739e6-6557-49e5-b732-07d6cf2a25e0:image.png)
-        
-        Kemudian pada baris paling akhir tambahkan
-        
-        ```php
-        <?= $this->endSection() ?>
-        ```
-        
-        ![image.png](attachment:d7078054-5b13-45a0-b082-14eb3af2ee16:image.png)
-        
-        Lihat hasilnya pada browser http://localhost:8080/, sama persis dengan tampilan file public\NiceAdmin\tables-data.html
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/49e867b8-7afb-46a3-855d-0b32eb988ef2/Untitled.png)
-        
-        Code yang diapit oleh section dan endSection merupakan content dari beranda yang akan dirender pada file layout.php pada langkah no 13 tadi.
-        
-        ![image.png](attachment:aaa7268e-8b91-4b95-99f8-11cb888eb782:image.png)
-        
-- Judul yang dinamis menggunakan url helper
-    1. Kemudian selanjutnya, judul pada setiap halaman akan dibuat dinamis sesuai dengan URL menu yang sedang dibuka. Judul terletak pada file layout.php bagian card-title. Jadi, misal sedang buka halaman Produk (http://localhost:8080/produk) maka judul yang tampil juga tertulis “Produk”.
-        
-        
-        Hal ini bisa dilakukan dengan menggunakan salah satu helper yang disediakan oleh CI yaitu URL helper. Caranya, aktifkan dulu helper url dengan cara buka file app/Config/Autoload.php dan tambahkan pada variable **$helper**. https://codeigniter.com/user_guide/helpers/index.html 
-        
-        ![image.png](attachment:0c0d27b8-0193-4b83-9239-be60b4803a4c:image.png)
-        
-        Autoload adalah fitur yang memungkinkan untuk memuat library, helper, dan model secara otomatis setiap kali sistem berjalan, sehingga tidak perlu memuatnya secara manual di setiap controller atau file.
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/3b78642c-005d-4dde-abc1-da929bdcc881/Untitled.png)
-        
-        Helper url diaktifkan karena akan menggunakan fungsi **uri_string()**, fungsi ini akan mencetak url setelah base_url. Base_url adalah url untuk root project (utama), konfigurasinya terdapat pada file app\Config\App.php
-        
-        ![image.png](attachment:70d41e1b-2b64-45a9-a683-d9b4ed38e048:image.png)
-        
-        Contoh, misalnya ketika user mengakses url http://localhost:8080/produk diharapkan pada bagian judul content akan tercetak juga kata **produk.**
-        
-        Gunakan fungsi **uri_string()** pada file layout.php, jika fungsi **uri_string()** ada isinya maka akan tampil sesuai urlnya, tapi jika tidak ada isinya maka akan tampil tulisan home.
-        
-    2. Terapkan pada file layout, buka file app/Views/layout.php dan tambahkan code berikut pada baris paling atas
-        
-        ```php
-        <?php
-        $hlm = "Home";
-        if(uri_string()!=""){
-          $hlm = ucwords(uri_string());
-        }
-        ?>
-        ```
-        
-        Ini untuk mengambil path dari url untuk menentukan halaman apa yang sedang diakses oleh user. Disimpan dalam variable $hlm.
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/d0145c9a-fb81-4629-8604-e0db47b88a8c/Untitled.png)
-        
-        Kemudian gunakan nilai variable $hlm untuk title halaman, ini akan tampil pada judul tab di browser.
-        
-        ```html
-        <title>- Toko - <?php echo $hlm ?></title>
-        ```
-        
-        ![image.png](attachment:611530d6-d6d1-4424-b795-f2f078de6ea1:image.png)
-        
-        ![image.png](attachment:1199a62f-0195-4955-b086-50fd2bf02613:3ffd42e7-9122-4eda-bb24-5d9581485b3a.png)
-        
-        Gunakan juga nilai variable $hlm untuk membuat tampilan breadcrumb.
-        
-        ```php
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <?php
-        	if($hlm!="Home"){
-        	  ?>
-        	  <li class="breadcrumb-item"><?php echo $hlm?></li> 
-        	  <?php
-        	}
-          ?> 
-        </ol>
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/49044519-042e-4ac9-8207-571f1bb5653d/Untitled.png)
-        
-        ![image.png](attachment:6ff8092d-9df9-4ef2-ab50-242f8a762d49:image.png)
-        
-        Sesuaikan juga pada bagian card-body
-        
-        ```php
-        <div class="card-body">
-          <h5 class="card-title"><?php echo $hlm?></h5>
-          <?= $this->renderSection('content') ?>
+    Session adalah mekanisme penyimpanan data sementara di sisi server yang digunakan untuk mempertahankan informasi user selama mereka berinteraksi dengan sebuah website. Setiap user akan memiliki identitas unik (session ID) yang biasanya disimpan di browser (melalui cookie), sementara data utamanya disimpan di server. Session yang ada pada Codeigniter pada dasarnya adalah session bawaan dari PHP yang dibungkus dalam sebuah Library, sehingga lebih mudah untuk digunakan. 
+    
+    Pertama buka file app/Views/components/header.php, cari code yang menampilkan menu Sign Out. Pada tag link nya <a>, ganti isi atribut href yang awalnya tanda pagar (#) menjadi **logout**. Route untuk logout akan dibuat pada langkah selanjutnya.
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/16295a7a-318b-4060-bb65-79abc891b858/Untitled.png)
+    
+    Sekalian, ubah tulisan **K. Anderson** menjadi
+    **<?= session()->get('username'); ?> (<?= session()->get('role'); ?>)**
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/3cc0bf92-a354-4914-9982-2f24bf1e117b/Untitled.png)
+    
+    Dengan code ini, maka pada header bisa tampil secara dinamis isi dari variable session yang menyimpan data username dan role (peran). 
+    
+    Session akan dibuat pada saat user berhasil login, code lengkapnya akan dibuat pada langkah selanjutnya.
+    
+2. Selanjutnya, siapkan dulu tampilan untuk halaman login. Pada halaman ini tidak bisa menggunakan file layout yang sudah dibuat pada tutorial sebelumnya, karena pada view login hanya berisi sebuah form ditengah halaman, tidak menampilkan component header, sidebar, dan footer. 
+    
+    ![image.png](attachment:2af00028-1a1e-4e45-9396-c4e95f699be9:image.png)
+    
+    Sehingga buat sebuah file layout baru bernama **layout_clear.php** di dalam folder Views. 
+    
+    File layout_clear.php ini mirip dengan file layout.php, hanya saja pada file layout_clear.php, tidak menggunakan (include) component header, sidebar, dan footer.  
+    
+    ```php
+    <?php
+    $hlm = "Home";
+    if(uri_string()!=""){
+      $hlm = ucwords(uri_string());
+    }
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+      <title>- Toko - <?php echo $hlm ?></title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+    
+      <!-- Favicons -->
+      <link href="<?= base_url()?>NiceAdmin/assets/img/favicon.png" rel="icon">
+      <link href="<?= base_url()?>NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    
+      <!-- Google Fonts -->
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
+      <!-- Vendor CSS Files -->
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+      <link href="<?= base_url()?>NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    
+      <!-- Template Main CSS File -->
+      <link href="<?= base_url()?>NiceAdmin/assets/css/style.css" rel="stylesheet">
+    
+      <!-- =======================================================
+      * Template Name: NiceAdmin
+      * Updated: Mar 09 2023 with Bootstrap v5.2.3
+      * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      * Author: BootstrapMade.com
+      * License: https://bootstrapmade.com/license/
+      ======================================================== -->
+    </head>
+    
+    <body> 
+    	<main>
+    	
+    	  <?= $this->renderSection('main') ?> 
+    	  
+    	</main><!-- End #main -->
+    
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    
+      <!-- Vendor JS Files -->
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/quill/quill.min.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+      <script src="<?= base_url()?>NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+    
+      <!-- Template Main JS File -->
+      <script src="<?= base_url()?>NiceAdmin/assets/js/main.js"></script>
+    
+    </body>
+    
+    </html>
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/0b2e4d09-7d5b-49eb-9d56-fdac995c5b54/Untitled.png)
+    
+    Hapus atribut id dan class yang ada pada tag main.
+    
+3. Layout_clear sudah siap digunakan, selanjutnya buat tampilan untuk form loginnya, pada folder Views buat file baru bernama v_login.php.
+    
+    Buka file public/NiceAdmin/pages-login.html copy bagian formnya saja (baris 46-113) lalu paste ke file v_login.php yang barusan dibuat.
+    
+    ![image.png](attachment:184a1795-6c40-487d-b357-1671b14bb3c6:image.png)
+    
+    Halaman login ini akan menggunakan tampilan dari layout_clear.php, maka tambahkan extend layout_clear dan penanda awal content, pada baris pertama
+    
+    ```php
+    <?= $this->extend('layout_clear') ?>
+    <?= $this->section('content') ?>
+    ```
+    
+    Dan juga tambahkan penanda akhir content, pada baris terakhir
+    
+    ```php
+    <?= $this->endSection() ?>
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/b128fa3c-f05c-4cc8-bf50-5044103673a6/Untitled.png)
+    
+4. Pada file app\Views\v_login.php, sesuaikan pemanggilan asset untuk logo pada baris 10 dan ubah nama toko pada baris 11
+    
+    ```php
+    <img src="<?php echo base_url() ?>NiceAdmin/assets/img/logo.png" alt="">
+    <span class="d-none d-lg-block">Toko</span>
+    ```
+    
+    ![image.png](attachment:90f125ba-0f9a-4652-a5be-619dfb53965f:image.png)
+    
+5. Lanjutkan dengan pembuatan form login. Pada file app\Views\v_login.php, tambahkan variable untuk komponen input pada form login. Untuk proses login, user perlu menginputkan data username dan password, maka buat variable untuk kedua inputan tersebut dan letakkan sesuai contoh
+    
+    ```php
+    <?php
+    $username = [
+        'name' => 'username',
+        'id' => 'username',
+        'class' => 'form-control'
+    ];
+    
+    $password = [
+        'name' => 'password',
+        'id' => 'password',
+        'class' => 'form-control'
+    ];
+    ?>
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/e55fa6f3-8313-43be-8e16-6ce9c3d6e9f5/Untitled.png)
+    
+6. Pada file app/Views/v_login.php, tambahkan code pada sebelum tag <form> untuk menampilkan pesan jika ada kesalahan saat login, pesan ini disimpan dalam session **flashdata**, yaitu jenis data session yang hanya tersedia untuk permintaan berikutnya (next request), dan kemudian secara otomatis dihapus setelah permintaan tersebut selesai.
+    
+    https://www.codeigniter.com/user_guide/libraries/sessions.html#flashdata
+    
+    ```php
+    <?php
+    if (session()->getFlashData('failed')) {
+    ?>
+        <div class="col-12 alert alert-danger" role="alert">
+            <hr>
+            <p class="mb-0">
+                <?= session()->getFlashData('failed') ?>
+            </p>
         </div>
-        ```
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/2ae90ee5-2383-4a1c-8b24-c41fef9965cd/Untitled.png)
-        
-        Hasilnya untuk halaman utama (home) [http://localhost:8080](http://localhost:8080/)
-        
-        ![image.png](attachment:f8555952-7e39-47f8-ad87-92109c6dc6a1:image.png)
-        
-    3. Lanjutkan untuk tampilan menu produk dan keranjang.
-    Buka file app/Views/produk.php dan keranjang.php, tambahkan code untuk menggunakan layout yang sudah dibuat, sehingga codenya menjadi
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/170959a4-a307-41a3-8895-9372ba0ee0c9/Untitled.png)
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/03003c81-ff17-4c4e-bd9a-c1ba20d6304e/Untitled.png)
-        
-        FIle view produk dan keranjang meng-extend tampilan dari layout, sehingga pada file-file ini cukup fokus pada isi content nya saja sesuai dengan masing-masing menu.
-        
-    4. Hasilnya jika menu produk dan keranjang diakses.
-    http://localhost:8080/produk
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/b988a9a3-163e-4a3c-86f8-c71afb0d9228/Untitled.png)
-        
-        http://localhost:8080/keranjang
-        
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/cec527e3-61f0-479d-a8e0-60ea67e45e01/Untitled.png)
+    <?php
+    }
+    ?>
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/0f4c4aee-0557-4e16-8e26-929d934f66cb/Untitled.png)
+    
+    Flashdata bisa untuk menyimpan banyak jenis info, sehingga perlu diberi kategori supaya mempermudah pengaksesannya. Misalnya untuk menyimpan pesan error yang berasal dari hasil pengecekan login ini disimpan dengan index ‘failed’.
+    
+    Contoh hasilnya nanti (saat ini belum bisa dicoba)
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/2f97484e-8cdc-41ae-abdb-bf5e3605ee24/Untitled.png)
+    
+7. Lanjutkan dengan membuat form login pada file app/Views/v_login.php, berdasarkan variable inputan yang sudah dibuat pada langkah sebelumnya.
+Code dari tag pembuka form **<form>** sampai tag penutup form **</form>** diganti dengan code berikut ini
+    
+    ```php
+    <?= form_open('login', 'class = "row g-3 needs-validation"') ?>
+    
+    <div class="col-12">
+        <label for="yourUsername" class="form-label">Username</label>
+        <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+            <?= form_input($username) ?>
+            <div class="invalid-feedback">Please enter your username.</div>
+        </div>
+    </div>
+    
+    <div class="col-12">
+        <label for="yourPassword" class="form-label">Password</label>
+    		    <?= form_password($password) ?>
+        <div class="invalid-feedback">Please enter your password!</div>
+    </div>
+    <div class="col-12">
+        <?= form_submit('submit', 'Login', ['class' => 'btn btn-primary w-100']) ?>
+    </div>
+    
+    <?= form_close() ?>
+    ```
+    
+    ![image.png](attachment:63c66175-88ad-4862-8758-84cf86d3b241:image.png)
+    
+    ![image.png](attachment:3ccb3df2-1137-4f10-aceb-44756925222b:image.png)
+    
+    Penjelasan fungsi yang digunakan :
+    
+    **form_open** adalah fungsi pembuka (awal) form, disini ditentukan action nya adalah login, sehingga nanti harus membuat route dengan nama login dengan method post, yang berguna untuk mengirimkan data dari form login menuju controller yang bertugas untuk memproses data tersebut.
+    
+    **form_input** adalah fungsi untuk membuat inputan form dengan tipe teks, yang isinya adalah variable $username yang sudah dibuat pada langkah no 5.
+    
+    **form_password** adalah fungsi untuk membuat inputan form dengan tipe password, yang isinya adalah variable $password, yang sudah dibuat pada langkah no 5.
+    
+    **form_submit** adalah fungsi untuk membuat inputan form dengan tipe submit, biasanya berupa tombol yang digunakan untuk mengirim data yang diinputkan pada form ke rute yang ditentukan pada bagian form_open.
+    
+    **form_close** adalah fungsi penutup (akhir) form.
+    
+8. View form login sudah selesai dibuat, supaya bisa diakses lanjutkan dengan membuat controller yang akan bertanggung jawab untuk menampikan form dan memproses data yang dikirimkan dari form tersebut, misalnya beri nama AuthController.
+Buka terminal baru (terpisah dari terminal untuk menjalankan project) lalu buat AuthController dengan menjalankan perintah
+    
+    ```html
+    php spark make:controller AuthController
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/8b8b53dc-21bc-4b84-96c8-f342a54a5775/Untitled.png)
+    
+    Hapus saja fungsi index, karena tidak terpakai.
+    
+9. Pada file app/Controllers/AuthController.php tambahkan fungsi __construct yang isinya adalah pemanggilan helper **form.** Pada helper form terdapat fungsi-fungsi yang dapat membantu dalam pembuatan dan penggunaan form (contohnya yang digunakan pada langkah no 7).
+    
+    ```php
+    function __construct()
+    {
+        helper('form');
+    }
+    ```
+    
+    ![image.png](attachment:3b4dad50-aa83-42d0-9955-3a2c01900d70:image.png)
+    
+    Construct adalah fungsi yang pertama kali di jalankan pada saat sebuah class di akses, dalam hal ini adalah class AuthController.
+    
+    Tambahkan fungsi baru bernama login, untuk menampilkan halaman login dan juga memproses data username dan password yang dikirim melalui form login. 
+    Untuk data user, sementara masih pakai data sample statis pada variable $dataUser (belum ambil dari database). **Username : april, Password :123, Role : admin.**
+    
+    Password dienkripsi menggunakan algoritma md5, jika ingin ganti password yang lain bisa menggunakan generator online misalnya https://www.md5hashgenerator.com/
+    
+    ```php
+    public function login()
+    {
+        if ($this->request->getPost()) {
+            $username = $this->request->getVar('username');
+            $password = $this->request->getVar('password');
+    
+            $dataUser = ['username' => 'april', 'password' => '202cb962ac59075b964b07152d234b70', 'role' => 'admin']; // passw 123
+    
+            if ($username == $dataUser['username']) {
+                if (md5($password) == $dataUser['password']) {
+                    session()->set([
+                        'username' => $dataUser['username'],
+                        'role' => $dataUser['role'],
+                        'isLoggedIn' => TRUE
+                    ]);
+    
+                    return redirect()->to(base_url('/'));
+                } else {
+                    session()->setFlashdata('failed', 'Username & Password Salah');
+                    return redirect()->back();
+                }
+            } else {
+                session()->setFlashdata('failed', 'Username Tidak Ditemukan');
+                return redirect()->back();
+            }
+        } else {
+            return view('v_login');
+        }
+    }
+    ```
+    
+    ![image.png](attachment:3b4b54eb-62f2-48ce-be31-0cdef5a87206:image.png)
+    
+    Alurnya, ketika ada data yang dikirim (post) dari form login, lakukan pengecekan apakah data username yang dikirim dari form cocok dengan data username yang tersimpan pada variable $dataUser. 
+    
+    Jika username tidak cocok, arahkan kembali ke form login dan tampilkan pesan failed 'Username Tidak Ditemukan'. Namun jika username cocok, lanjutkan dengan pengecekan password. 
+    
+    Jika password tidak cocok, arahkan kembali ke form login dan tampilkan pesan failed 'Username & Password Salah'. Jika password cocok, set variable session dengan isi username, password, dan role dari user yang berhasil login, lalu arahkan tampilan ke halaman utama.
+    
+    Pesan kesalahan login yang disimpan dalam session flashdata dengan index ‘failed’ akan ditampilkan pada bagian form login yang sudah dibuat pada langkah no 6 tadi.
+    
+    Kemudian, tambahkan fungsi baru bernama logout, code ini digunakan untuk mengakhiri sesi (destroy) lalu tampilan website kembali diarahkan ke form login.
+    
+    ```php
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('login');
+    }
+    ```
+    
+    ![image.png](attachment:dbc90a1b-79dc-4704-b3ec-2470fefec269:image.png)
+    
+    Sehingga pada AuthController saat ini terdapat 3 fungsi yaitu : **__construct**, **login**, dan **logout**.
+    
+10. Controller sudah dibuat, tinggal menambahkan rute pada file app/config/Routes.php. Ada tiga rute baru yang harus dibuat untuk proses authentication.
+    
+    ```php
+    $routes->get('login', 'AuthController::login');
+    $routes->post('login', 'AuthController::login');
+    $routes->get('logout', 'AuthController::logout');
+    ```
+    
+    1. Untuk menampilkan halaman login (form). http://localhost:8080/login
+    2. Untuk mengirim data user (dengan method POST) dari form login ke fungsi login() pada AuthController.
+    3. Untuk mengakhiri sesi dengan menjalankan fungsi logout() pada AuthController.
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/9a4e4d89-6383-411c-bd43-68fa97dfc59f/Untitled.png)
+    
+    Sekarang, coba pada browser buka url http://localhost:8080/login
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/b5269c75-5c08-4e6c-bac1-a0ad24c03ec7/Untitled.png)
+    
+    Masukkan username dan password yang ditentukan pada data statis di langkah no 14 tadi. Jika gagal login akan menampilkan pesan kesalahan.
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/112c401e-773e-4f33-bf48-6deab7e6cbdd/Untitled.png)
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/2f97484e-8cdc-41ae-abdb-bf5e3605ee24/Untitled.png)
+    
+    Jika berhasil login akan masuk ke halaman home dan pada pojok kanan atas akan menampilkan username yang sedang login pada sesi itu.
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/332d3749-1e40-47dd-9041-59670fa067ee/9ccd3d67-7030-456c-9d74-70ccadbd4193/Untitled.png)
+    
+    Jika klik menu Sign Out maka akan kembali ke halaman login.

@@ -16,8 +16,11 @@
   - Pasang tata letak (`extend`) ke `v_home`, `v_produk`, dan `v_keranjang`.
   - Judul dinamis otomatis via `uri_string()`.
 
-- [ ] **4. Session**
-  - *Belum dimulai*
+- [x] **4. Session**
+  - Ubah `header.php` ke dinamisasi pengguna `<?= session()->get() ?>`.
+  - Pasang Route autentikasi (`login` & `logout`).
+  - Slicing `v_login.php` dengan `layout_clear.php`.
+  - Buat `AuthController.php` (Flashdata Error & MD5 Session `april`).
 
 - [ ] **5. Filter**
   - *Belum dimulai*
