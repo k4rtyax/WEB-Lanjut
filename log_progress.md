@@ -22,5 +22,7 @@
   - Slicing `v_login.php` dengan `layout_clear.php`.
   - Buat `AuthController.php` (Flashdata Error & MD5 Session `april`).
 
-- [ ] **5. Filter**
-  - *Belum dimulai*
+- [x] **5. Filter**
+  - Membuat `AuthFilter.php` untuk satpam URL (`before`).
+  - Mendaftarkan alias `auth` di `Filters.php`.
+  - Pasang proteksi di *Routes* (`/`, `/produk`, `/keranjang`).
