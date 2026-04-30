@@ -132,3 +132,4 @@ test.txt
 materi.txt
 log_progress.md
 *.pdf
+/vendor

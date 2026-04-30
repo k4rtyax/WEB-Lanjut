@@ -100,8 +100,13 @@ class ComposerStaticInitf5cce40800fa5dae1504b9364f585e6a
     );
 
     public static $classMap = array (
+        'App\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Controllers/AuthController.php',
         'App\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/Controllers/BaseController.php',
+        'App\\Controllers\\Hello' => __DIR__ . '/../..' . '/app/Controllers/Hello.php',
         'App\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Controllers/Home.php',
+        'App\\Controllers\\ProdukController' => __DIR__ . '/../..' . '/app/Controllers/ProdukController.php',
+        'App\\Controllers\\TransaksiController' => __DIR__ . '/../..' . '/app/Controllers/TransaksiController.php',
+        'App\\Filters\\Auth' => __DIR__ . '/../..' . '/app/Filters/Auth.php',
         'CodeIgniter\\API\\ApiException' => __DIR__ . '/..' . '/codeigniter4/framework/system/API/ApiException.php',
         'CodeIgniter\\API\\BaseTransformer' => __DIR__ . '/..' . '/codeigniter4/framework/system/API/BaseTransformer.php',
         'CodeIgniter\\API\\ResponseTrait' => __DIR__ . '/..' . '/codeigniter4/framework/system/API/ResponseTrait.php',
